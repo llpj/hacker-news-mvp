@@ -8,7 +8,9 @@ import retrofit.RestAdapter;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /**
@@ -63,21 +65,43 @@ public class HackerNewsDataSource {
     }
 
     public void getLatestNewsItems() {
-        createLatestStoryListObservable()
+        createLatestNewsItemsObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new OnNextListener(EventBusProvider.getNetworkBusInstance()),
-                        new OnErrorListener(EventBusProvider.getNetworkBusInstance()));
+                .subscribe(new OnListNewsItemNextListener(EventBusProvider.getNetworkBusInstance()),
+                        new OnListNewsItemErrorListener(EventBusProvider.getNetworkBusInstance()));
     }
 
-    private Observable<List<NewsItem>> createLatestStoryListObservable() {
+    private Observable<List<NewsItem>> createLatestNewsItemsObservable() {
         return mHackerNewsService.topStories()
                 .lift(this.<String>flattenList())
                 .limit(MAX_NUMBER_STORIES)
                 .flatMap(new Func1<String, Observable<NewsItem>>() {
                     @Override
-                    public Observable<NewsItem> call(String storyId) {
-                        return mHackerNewsService.item(storyId);
+                    public Observable<NewsItem> call(String id) {
+                        return mHackerNewsService.item(id);
+                    }
+                }).toList();
+    }
+
+    public void getComments(List<String> ids) {
+        createCommentsObservable(ids)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<Comment>>() {
+                    @Override
+                    public void call(List<Comment> comments) {
+                        EventBusProvider.getNetworkBusInstance().post(comments);
+                    }
+                });
+    }
+
+    private Observable<List<Comment>> createCommentsObservable(List<String> ids) {
+        return Observable.from(ids)
+                .flatMap(new Func1<String, Observable<Comment>>() {
+                    @Override
+                    public Observable<Comment> call(String id) {
+                        return mHackerNewsService.comment(id);
                     }
                 }).toList();
     }

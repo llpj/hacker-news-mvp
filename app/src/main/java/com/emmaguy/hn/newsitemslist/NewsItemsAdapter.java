@@ -1,10 +1,9 @@
 package com.emmaguy.hn.newsitemslist;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.PluralsRes;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.emmaguy.hn.R;
+import com.emmaguy.hn.comments.CommentsActivity;
 import com.emmaguy.hn.model.NewsItem;
 import com.emmaguy.hn.newsitemdetail.NewsItemDetailActivity;
 
@@ -26,7 +26,7 @@ import butterknife.OnClick;
 /**
  * Created by emma on 21/03/15.
  */
-public class NewsItemsAdapter extends RecyclerView.Adapter<NewsItemsAdapter.StoryHolder> {
+public class NewsItemsAdapter extends RecyclerView.Adapter<NewsItemsAdapter.NewsItemHolder> {
     private final List<NewsItem> mNewsItems = new ArrayList<>();
     private Context mContext;
 
@@ -42,19 +42,26 @@ public class NewsItemsAdapter extends RecyclerView.Adapter<NewsItemsAdapter.Stor
     }
 
     @Override
-    public StoryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NewsItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.list_item_story, parent, false);
+                .inflate(R.layout.row_news_item, parent, false);
 
-        return new StoryHolder(v);
+        return new NewsItemHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(StoryHolder holder, int position) {
+    public void onBindViewHolder(NewsItemHolder holder, int position) {
         NewsItem newsItem = mNewsItems.get(position);
 
         holder.mTitle.setText(newsItem.getTitle());
+        formatPluralString(holder.mScore, R.plurals.points, newsItem.getScore());
+        formatPluralString(holder.mComments, R.plurals.comments, newsItem.getRootCommentIds().size());
+    }
+
+    private void formatPluralString(TextView textView, @PluralsRes int res, int number) {
+        String text = mContext.getResources().getQuantityString(res, number, number);
+        textView.setText(text);
     }
 
     @Override
@@ -62,10 +69,12 @@ public class NewsItemsAdapter extends RecyclerView.Adapter<NewsItemsAdapter.Stor
         return mNewsItems.size();
     }
 
-    public class StoryHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.list_item_story_textview_title) TextView mTitle;
+    public class NewsItemHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.row_news_item_textview_score) TextView mScore;
+        @InjectView(R.id.row_news_item_textview_title) TextView mTitle;
+        @InjectView(R.id.row_news_item_textview_comments) TextView mComments;
 
-        public StoryHolder(View view) {
+        public NewsItemHolder(View view) {
             super(view);
 
             ButterKnife.inject(this, view);
@@ -73,19 +82,23 @@ public class NewsItemsAdapter extends RecyclerView.Adapter<NewsItemsAdapter.Stor
             setElevation();
         }
 
-        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
         private void setElevation() {
-            int elevation = mContext.getResources().getDimensionPixelSize(R.dimen.list_item_story_elevation);
+            int elevation = mContext.getResources().getDimensionPixelSize(R.dimen.row_news_item_elevation);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mTitle.setElevation(elevation);
-            } else {
-                ViewCompat.setElevation(mTitle, elevation);
-            }
+            ViewCompat.setElevation(mTitle, elevation);
         }
 
-        @OnClick(R.id.list_item_story_viewgroup_root)
-        public void clickOnItem() {
+        @OnClick(R.id.row_news_item_textview_comments)
+        public void viewComments() {
+            NewsItem newsItem = mNewsItems.get(getPosition());
+
+            Intent intent = new Intent(mContext, CommentsActivity.class);
+            intent.putExtra(CommentsActivity.EXTRA_NEWS_ITEM_KEY_ID, newsItem.getRootCommentIds());
+            mContext.startActivity(intent);
+        }
+
+        @OnClick(R.id.row_news_item_imageview_url)
+        public void viewLink() {
             NewsItem newsItem = mNewsItems.get(getPosition());
 
             Intent intent = new Intent(mContext, NewsItemDetailActivity.class);

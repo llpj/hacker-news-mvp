@@ -30,8 +30,8 @@ public class NewsItemsActivity extends ActionBarActivity implements NewsItemsVie
     @InjectView(R.id.news_items_recyclerview_list) RecyclerView mNewsItemsList;
     @InjectView(R.id.news_items_progress_bar_loading) ProgressBar mProgressBar;
 
-    private NewsItemsPresenterImpl mPresenter;
     private NewsItemsAdapter mAdapter;
+    private NewsItemsPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +40,9 @@ public class NewsItemsActivity extends ActionBarActivity implements NewsItemsVie
         setContentView(R.layout.activity_news_items);
 
         ButterKnife.inject(this);
-
-        initialiseList();
         setSupportActionBar(mToolbar);
 
+        initialiseList();
         mAdapter = new NewsItemsAdapter(this);
         mNewsItemsList.setAdapter(mAdapter);
 

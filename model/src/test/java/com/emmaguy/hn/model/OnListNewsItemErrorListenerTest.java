@@ -15,17 +15,17 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 /**
  * Created by emma on 21/03/15.
  */
-public class OnErrorListenerTest {
+public class OnListNewsItemErrorListenerTest {
     @Mock
     private Bus mMockNetworkBus;
 
-    private OnErrorListener mErrorListener;
+    private OnListNewsItemErrorListener mErrorListener;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mErrorListener = new OnErrorListener(mMockNetworkBus);
+        mErrorListener = new OnListNewsItemErrorListener(mMockNetworkBus);
     }
 
     @Test

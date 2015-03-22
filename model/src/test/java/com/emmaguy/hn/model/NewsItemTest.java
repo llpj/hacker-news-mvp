@@ -2,6 +2,7 @@ package com.emmaguy.hn.model;
 
 import com.google.gson.Gson;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -16,8 +17,11 @@ public class NewsItemTest {
     public void test_newsItemDeserialisation() {
         NewsItem item = new Gson().fromJson(getNewsItemJson(), NewsItem.class);
 
+        assertThat(item.getId(), equalTo("1234"));
+        assertThat(item.getScore(), equalTo(111));
         assertThat(item.getTitle(), equalTo("Emma is awesome"));
         assertThat(item.getUrl(), equalTo("http://www.github.com/emmaguy"));
+        assertThat(item.getRootCommentIds(), CoreMatchers.hasItems("8952", "9224"));
     }
 
     private String getNewsItemJson() {

@@ -15,17 +15,17 @@ import static org.mockito.Mockito.verify;
 /**
  * Created by emma on 21/03/15.
  */
-public class OnNextListenerTest {
+public class OnListNewsItemNextListenerTest {
     @Mock
     private Bus mMockNetworkBus;
 
-    private OnNextListener mNextListener;
+    private OnListNewsItemNextListener mNextListener;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mNextListener = new OnNextListener(mMockNetworkBus);
+        mNextListener = new OnListNewsItemNextListener(mMockNetworkBus);
     }
 
     @Test
