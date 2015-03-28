@@ -2,7 +2,6 @@ package com.emmaguy.hn.model;
 
 import com.google.gson.Gson;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -18,8 +17,10 @@ public class CommentTest {
     public void test_commentDeserialisation() {
         Comment item = new Gson().fromJson(getCommentJson(), Comment.class);
 
+        assertThat(item.getId(), equalTo("8952"));
         assertThat(item.getText(), equalTo("Blah blah"));
-        assertThat(item.getCommentIds(), contains("9153"));
+        assertThat(item.getParent(), equalTo("8863"));
+        assertThat(item.getChildCommentIds(), contains("9153"));
     }
 
     private String getCommentJson() {

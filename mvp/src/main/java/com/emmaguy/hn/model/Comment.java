@@ -8,11 +8,17 @@ import java.util.ArrayList;
  * Created by emma on 22/03/15.
  */
 public class Comment {
+    @SerializedName("id")
+    private String mId;
+
     @SerializedName("text")
     private String mText = "";
 
+    @SerializedName("parent")
+    private String mParent = "";
+
     @SerializedName("kids")
-    private ArrayList<String> mCommentIds = new ArrayList<>();
+    private ArrayList<String> mChildCommentIds = new ArrayList<>();
 
     public Comment() {}
 
@@ -20,11 +26,19 @@ public class Comment {
         mText = text;
     }
 
+    public String getId() {
+        return mId;
+    }
+
     public String getText() {
         return mText;
     }
 
-    public ArrayList<String> getCommentIds() {
-        return mCommentIds;
+    public ArrayList<String> getChildCommentIds() {
+        return mChildCommentIds;
+    }
+
+    public String getParent() {
+        return mParent;
     }
 }

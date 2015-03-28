@@ -8,6 +8,7 @@ import com.emmaguy.hn.model.data.comments.OnCommentNextListener;
 import com.emmaguy.hn.model.data.newsitems.OnListNewsItemErrorListener;
 import com.emmaguy.hn.model.data.newsitems.OnListNewsItemNextListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RestAdapter;
@@ -21,7 +22,7 @@ import rx.schedulers.Schedulers;
  * Created by emma on 21/03/15.
  */
 public class WebDataSource implements HackerNewsDataSource {
-    private static final int MAX_NUMBER_STORIES = 1;
+    private static final int MAX_NUMBER_STORIES = 25;
     private static final String ENDPOINT_URL_HACKER_NEWS_API = "https://hacker-news.firebaseio.com";
     private static HackerNewsDataSource sDataSourceInstance = null;
     private final HackerNewsService mHackerNewsService;
@@ -105,6 +106,29 @@ public class WebDataSource implements HackerNewsDataSource {
                     public Observable<Comment> call(String id) {
                         return mHackerNewsService.comment(id);
                     }
-                }).toList();
+                })
+                .flatMap(new Func1<Comment, Observable<List<Comment>>>() {
+                    @Override
+                    public Observable<List<Comment>> call(Comment comment) {
+                        List<Comment> value = new ArrayList<>();
+                        value.add(comment);
+
+                        Observable<List<Comment>> o = Observable.just(value);
+                        if (comment.getChildCommentIds().isEmpty()) {
+                            return o;
+                        }
+
+                        return createCommentsObservable(comment.getChildCommentIds()).concatWith(o);
+                    }
+                })
+                        // flatten and then combine all for 1 return value
+                .lift(this.<Comment>flattenList())
+                .filter(new Func1<Comment, Boolean>() {
+                    @Override
+                    public Boolean call(Comment comment) {
+                        return comment != null && !comment.getText().equals("");
+                    }
+                })
+                .toList();
     }
 }

@@ -2,7 +2,6 @@ package com.emmaguy.hn.presenter.comments;
 
 import android.support.annotation.NonNull;
 
-import com.emmaguy.hn.model.Comment;
 import com.emmaguy.hn.model.data.Events;
 import com.emmaguy.hn.model.data.HackerNewsDataSource;
 import com.emmaguy.hn.view.CommentsView;

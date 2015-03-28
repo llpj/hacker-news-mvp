@@ -56,7 +56,6 @@ public class NewsItemsAdapter extends RecyclerView.Adapter<NewsItemsAdapter.News
 
         holder.mTitle.setText(newsItem.getTitle());
         formatPluralString(holder.mScore, R.plurals.points, newsItem.getScore());
-        formatPluralString(holder.mComments, R.plurals.comments, newsItem.getRootCommentIds().size());
     }
 
     private void formatPluralString(TextView textView, @PluralsRes int res, int number) {
@@ -72,7 +71,6 @@ public class NewsItemsAdapter extends RecyclerView.Adapter<NewsItemsAdapter.News
     public class NewsItemHolder extends RecyclerView.ViewHolder {
         @InjectView(R.id.row_news_item_textview_score) TextView mScore;
         @InjectView(R.id.row_news_item_textview_title) TextView mTitle;
-        @InjectView(R.id.row_news_item_textview_comments) TextView mComments;
 
         public NewsItemHolder(View view) {
             super(view);
@@ -93,7 +91,8 @@ public class NewsItemsAdapter extends RecyclerView.Adapter<NewsItemsAdapter.News
             NewsItem newsItem = mNewsItems.get(getPosition());
 
             Intent intent = new Intent(mContext, CommentsActivity.class);
-            intent.putExtra(CommentsActivity.EXTRA_NEWS_ITEM_KEY_ID, newsItem.getRootCommentIds());
+            intent.putExtra(CommentsActivity.EXTRA_NEWS_ITEM_ID, newsItem.getId());
+            intent.putExtra(CommentsActivity.EXTRA_NEWS_ITEM_COMMENT_KEYS_ID, newsItem.getRootCommentIds());
             mContext.startActivity(intent);
         }
 

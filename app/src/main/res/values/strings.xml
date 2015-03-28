@@ -8,8 +8,4 @@
         <item quantity="other">%1$d points</item>
     </plurals>
 
-    <plurals name="comments">
-        <item quantity="one">comment %1$d</item>
-        <item quantity="other">comments %1$d</item>
-    </plurals>
 </resources>

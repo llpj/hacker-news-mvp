@@ -29,13 +29,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_article" />
 
-        <TextView
+        <ImageView
             android:id="@+id/row_news_item_textview_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/ic_comments"
-            android:textSize="10sp"
-            tools:text="123 comments" />
+            android:src="@drawable/ic_comments" />
 
     </LinearLayout>
 
