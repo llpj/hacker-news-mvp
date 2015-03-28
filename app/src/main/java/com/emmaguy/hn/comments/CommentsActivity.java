@@ -10,8 +10,8 @@ import android.widget.ScrollView;
 import com.emmaguy.hn.R;
 import com.emmaguy.hn.common.EventBusProvider;
 import com.emmaguy.hn.model.Comment;
-import com.emmaguy.hn.model.data.HackerNewsDataSource;
-import com.emmaguy.hn.model.data.WebDataSource;
+import com.emmaguy.hn.model.data.datasource.NewsDataSource;
+import com.emmaguy.hn.model.data.datasource.HackerNewsDataSource;
 import com.emmaguy.hn.presenter.comments.CommentsPresenter;
 import com.emmaguy.hn.presenter.comments.CommentsPresenterImpl;
 import com.emmaguy.hn.view.CommentsView;
@@ -34,7 +34,7 @@ public class CommentsActivity extends ActionBarActivity implements CommentsView 
 
     private String mNewsItemId;
     private CommentsPresenter mPresenter;
-    private HackerNewsDataSource mDataSource;
+    private NewsDataSource mDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class CommentsActivity extends ActionBarActivity implements CommentsView 
         mNewsItemId = getIntent().getStringExtra(EXTRA_NEWS_ITEM_ID);
         ArrayList<String> ids = getIntent().getStringArrayListExtra(EXTRA_NEWS_ITEM_COMMENT_KEYS_ID);
 
-        mDataSource = WebDataSource.getInstance();
+        mDataSource = HackerNewsDataSource.getInstance();
         mPresenter = new CommentsPresenterImpl(this,
                 ids,
                 mDataSource,

@@ -12,7 +12,7 @@ import rx.Observable;
 /**
  * Created by emma on 15/02/15.
  */
-public interface HackerNewsService {
+public interface HackerNewsApiService {
     @GET("/v0/topstories.json")
     Observable<List<String>> topStories();
 

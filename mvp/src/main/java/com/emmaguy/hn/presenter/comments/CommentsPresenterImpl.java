@@ -3,7 +3,7 @@ package com.emmaguy.hn.presenter.comments;
 import android.support.annotation.NonNull;
 
 import com.emmaguy.hn.model.data.Events;
-import com.emmaguy.hn.model.data.HackerNewsDataSource;
+import com.emmaguy.hn.model.data.datasource.NewsDataSource;
 import com.emmaguy.hn.view.CommentsView;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -17,9 +17,9 @@ public class CommentsPresenterImpl implements CommentsPresenter {
     private final Bus mNetworkBus;
     private final CommentsView mView;
     private final ArrayList<String> mIds;
-    private final HackerNewsDataSource mDataSource;
+    private final NewsDataSource mDataSource;
 
-    public CommentsPresenterImpl(CommentsView view, ArrayList<String> ids, HackerNewsDataSource dataSource, Bus bus) {
+    public CommentsPresenterImpl(CommentsView view, ArrayList<String> ids, NewsDataSource dataSource, Bus bus) {
         mIds = ids;
         mView = view;
         mNetworkBus = bus;

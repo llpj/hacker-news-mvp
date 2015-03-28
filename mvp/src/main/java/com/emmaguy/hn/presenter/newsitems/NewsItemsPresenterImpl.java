@@ -3,7 +3,7 @@ package com.emmaguy.hn.presenter.newsitems;
 import android.support.annotation.NonNull;
 
 import com.emmaguy.hn.model.data.Events;
-import com.emmaguy.hn.model.data.HackerNewsDataSource;
+import com.emmaguy.hn.model.data.datasource.NewsDataSource;
 import com.emmaguy.hn.view.NewsItemsView;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -14,9 +14,9 @@ import com.squareup.otto.Subscribe;
 public class NewsItemsPresenterImpl implements NewsItemsPresenter {
     private final Bus mNetworkBus;
     private final NewsItemsView mNewsItemsView;
-    private final HackerNewsDataSource mDataSource;
+    private final NewsDataSource mDataSource;
 
-    public NewsItemsPresenterImpl(NewsItemsView newsItemsView, HackerNewsDataSource dataSource, Bus networkBus) {
+    public NewsItemsPresenterImpl(NewsItemsView newsItemsView, NewsDataSource dataSource, Bus networkBus) {
         mNetworkBus = networkBus;
         mDataSource = dataSource;
         mNewsItemsView = newsItemsView;

@@ -2,7 +2,7 @@ package com.emmaguy.hn.presenter;
 
 import com.emmaguy.hn.model.NewsItem;
 import com.emmaguy.hn.model.data.Events;
-import com.emmaguy.hn.model.data.HackerNewsDataSource;
+import com.emmaguy.hn.model.data.datasource.NewsDataSource;
 import com.emmaguy.hn.presenter.newsitems.NewsItemsPresenterImpl;
 import com.emmaguy.hn.view.NewsItemsView;
 import com.squareup.otto.Bus;
@@ -30,7 +30,7 @@ public class NewsItemsPresenterImplTest {
     private NewsItemsView mMockView;
 
     @Mock
-    private HackerNewsDataSource mMockDataSource;
+    private NewsDataSource mMockDataSource;
 
     private NewsItemsPresenterImpl mPresenter;
 

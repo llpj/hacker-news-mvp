@@ -1,4 +1,4 @@
-package com.emmaguy.hn.model.data;
+package com.emmaguy.hn.model.data.datasource;
 
 import com.emmaguy.hn.common.EventBusProvider;
 import com.emmaguy.hn.model.Comment;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * News data source based on static dummy data.
  */
-public class StaticDataSource implements HackerNewsDataSource {
+public class StaticDataSource implements NewsDataSource {
     public static final int DEFAULT_NUMBER_NEWS_ITEMS = 35;
     public static final int DEFAULT_NUMBER_COMMENTS = 20;
 
@@ -28,7 +28,7 @@ public class StaticDataSource implements HackerNewsDataSource {
         List<Comment> comments = new ArrayList<>();
 
         for (int i = 1; i <= DEFAULT_NUMBER_COMMENTS; i++) {
-            comments.add(new Comment("Super insightful static comment #" + (i + 1)));
+            comments.add(new Comment("Super insightful static comment #" + i));
         }
 
         EventBusProvider.getNetworkBusInstance().post(comments);
