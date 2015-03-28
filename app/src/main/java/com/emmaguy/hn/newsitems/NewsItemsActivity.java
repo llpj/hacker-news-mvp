@@ -19,6 +19,7 @@ import com.emmaguy.hn.model.NewsItem;
 import com.emmaguy.hn.presenter.newsitems.NewsItemsPresenter;
 import com.emmaguy.hn.presenter.newsitems.NewsItemsPresenterImpl;
 import com.emmaguy.hn.view.NewsItemsView;
+import com.emmaguy.hn.model.data.WebDataSource;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class NewsItemsActivity extends ActionBarActivity implements NewsItemsVie
 
     private NewsItemsAdapter mAdapter;
     private NewsItemsPresenter mPresenter;
+    private HackerNewsDataSource mDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,9 @@ public class NewsItemsActivity extends ActionBarActivity implements NewsItemsVie
         mAdapter = new NewsItemsAdapter(this);
         mNewsItemsList.setAdapter(mAdapter);
 
+        mDataSource = WebDataSource.getInstance();
         mPresenter = new NewsItemsPresenterImpl(this,
-                HackerNewsDataSource.getInstance(),
+                mDataSource,
                 EventBusProvider.getNetworkBusInstance());
     }
 

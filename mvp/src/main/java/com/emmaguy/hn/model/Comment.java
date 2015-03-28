@@ -14,6 +14,12 @@ public class Comment {
     @SerializedName("kids")
     private ArrayList<String> mCommentIds = new ArrayList<>();
 
+    public Comment() {}
+
+    public Comment(String text) {
+        mText = text;
+    }
+
     public String getText() {
         return mText;
     }

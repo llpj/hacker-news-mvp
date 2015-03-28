@@ -23,6 +23,14 @@ public class NewsItem {
     @SerializedName("score")
     private int mScore = 0;
 
+    public NewsItem() {}
+
+    public NewsItem(String title, String url) {
+        super();
+        mTitle = title;
+        mUrl = url;
+    }
+
     public String getId() {
         return mId;
     }

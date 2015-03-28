@@ -1,6 +1,7 @@
 package com.emmaguy.hn.model.data;
 
 import com.emmaguy.hn.model.NewsItem;
+import com.emmaguy.hn.model.data.newsitems.OnListNewsItemNextListener;
 import com.squareup.otto.Bus;
 
 import org.junit.Before;

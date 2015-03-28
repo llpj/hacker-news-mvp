@@ -1,5 +1,7 @@
 package com.emmaguy.hn.model.data;
 
+import com.emmaguy.hn.model.data.newsitems.NewsItemsRequestFailedEvent;
+import com.emmaguy.hn.model.data.newsitems.OnListNewsItemErrorListener;
 import com.squareup.otto.Bus;
 
 import org.junit.Before;

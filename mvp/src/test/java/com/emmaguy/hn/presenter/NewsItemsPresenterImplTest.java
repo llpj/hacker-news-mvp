@@ -1,8 +1,8 @@
 package com.emmaguy.hn.presenter;
 
-import com.emmaguy.hn.model.data.HackerNewsDataSource;
 import com.emmaguy.hn.model.NewsItem;
-import com.emmaguy.hn.model.data.NewsItemsRequestFailedEvent;
+import com.emmaguy.hn.model.data.HackerNewsDataSource;
+import com.emmaguy.hn.model.data.newsitems.NewsItemsRequestFailedEvent;
 import com.emmaguy.hn.presenter.newsitems.NewsItemsPresenterImpl;
 import com.emmaguy.hn.view.NewsItemsView;
 import com.squareup.otto.Bus;
@@ -10,7 +10,6 @@ import com.squareup.otto.Bus;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;

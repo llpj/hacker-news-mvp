@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 import com.emmaguy.hn.R;
 import com.emmaguy.hn.common.EventBusProvider;
 import com.emmaguy.hn.model.Comment;
+import com.emmaguy.hn.model.data.WebDataSource;
 import com.emmaguy.hn.model.data.HackerNewsDataSource;
 import com.emmaguy.hn.presenter.comments.CommentsPresenter;
 import com.emmaguy.hn.presenter.comments.CommentsPresenterImpl;
@@ -29,6 +30,7 @@ public class CommentsActivity extends ActionBarActivity implements CommentsView 
     @InjectView(R.id.comments_progress_bar_loading) ProgressBar mLoadingIndicator;
 
     private CommentsPresenter mPresenter;
+    private HackerNewsDataSource mDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,10 @@ public class CommentsActivity extends ActionBarActivity implements CommentsView 
 
         ArrayList<String> ids = getIntent().getStringArrayListExtra(EXTRA_NEWS_ITEM_KEY_ID);
 
+        mDataSource = WebDataSource.getInstance();
         mPresenter = new CommentsPresenterImpl(this,
                 ids,
-                HackerNewsDataSource.getInstance(),
+                mDataSource,
                 EventBusProvider.getNetworkBusInstance());
     }
 

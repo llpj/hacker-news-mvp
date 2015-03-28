@@ -1,8 +1,10 @@
-package com.emmaguy.hn.model.data;
+package com.emmaguy.hn.model.data.newsitems;
 
 import com.squareup.otto.Bus;
 
-public class OnListNewsItemErrorListener implements rx.functions.Action1<Throwable> {
+import rx.functions.Action1;
+
+public class OnListNewsItemErrorListener implements Action1<Throwable> {
     private Bus mNetworkBus;
 
     public OnListNewsItemErrorListener(Bus networkBus) {
