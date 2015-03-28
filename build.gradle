@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.+'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.+'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -17,20 +18,3 @@ allprojects {
         jcenter()
     }
 }
-
-// for cobertura code coverage with coveralls
-apply plugin: 'cobertura'
-apply plugin: 'com.github.kt3k.coveralls'
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'net.saliman:gradle-cobertura-plugin:2.+' // cobertura plugin
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.+'
-    }
-}
-
-cobertura.coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
