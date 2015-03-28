@@ -1,5 +1,6 @@
 package com.emmaguy.hn.model.data.newsitems;
 
+import com.emmaguy.hn.model.data.Events;
 import com.squareup.otto.Bus;
 
 import rx.functions.Action1;
@@ -13,6 +14,6 @@ public class OnListNewsItemErrorListener implements Action1<Throwable> {
 
     @Override
     public void call(Throwable throwable) {
-        mNetworkBus.post(new NewsItemsRequestFailedEvent());
+        mNetworkBus.post(new Events.NewsItemsRequestFailedEvent());
     }
 }

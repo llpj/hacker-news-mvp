@@ -1,6 +1,7 @@
 package com.emmaguy.hn.presenter;
 
 import com.emmaguy.hn.model.Comment;
+import com.emmaguy.hn.model.data.Events;
 import com.emmaguy.hn.model.data.HackerNewsDataSource;
 import com.emmaguy.hn.presenter.comments.CommentsPresenterImpl;
 import com.emmaguy.hn.view.CommentsView;
@@ -75,7 +76,7 @@ public class CommentsPresenterImplTest {
 
     @Test
     public void test_onCommentsReceived_hidesLoadingIndicator() {
-        mPresenter.onCommentsReceived(new ArrayList<Comment>());
+        mPresenter.onCommentsReceived(new Events.CommentsSuccessEvent(new ArrayList<Comment>()));
 
         verify(mMockView, times(1)).hideLoadingIndicator();
     }
@@ -83,7 +84,7 @@ public class CommentsPresenterImplTest {
     @Test
     public void test_onCommentsReceived_showsComments() {
         ArrayList<Comment> comments = new ArrayList<>();
-        mPresenter.onCommentsReceived(comments);
+        mPresenter.onCommentsReceived(new Events.CommentsSuccessEvent(comments));
 
         verify(mMockView, times(1)).showComments(comments);
     }

@@ -2,6 +2,7 @@ package com.emmaguy.hn.view;
 
 import com.emmaguy.hn.model.NewsItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

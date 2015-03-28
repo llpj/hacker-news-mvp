@@ -3,6 +3,7 @@ package com.emmaguy.hn.presenter.comments;
 import android.support.annotation.NonNull;
 
 import com.emmaguy.hn.model.Comment;
+import com.emmaguy.hn.model.data.Events;
 import com.emmaguy.hn.model.data.HackerNewsDataSource;
 import com.emmaguy.hn.view.CommentsView;
 import com.squareup.otto.Bus;
@@ -40,8 +41,8 @@ public class CommentsPresenterImpl implements CommentsPresenter {
     }
 
     @Subscribe
-    public void onCommentsReceived(@NonNull ArrayList<Comment> comments) {
+    public void onCommentsReceived(@NonNull Events.CommentsSuccessEvent event) {
         mView.hideLoadingIndicator();
-        mView.showComments(comments);
+        mView.showComments(event.getData());
     }
 }

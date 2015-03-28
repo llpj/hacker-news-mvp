@@ -2,6 +2,7 @@ package com.emmaguy.hn.model.data.newsitems;
 
 import com.emmaguy.hn.model.NewsItem;
 import com.emmaguy.hn.model.NewsItemComparator;
+import com.emmaguy.hn.model.data.Events;
 import com.squareup.otto.Bus;
 
 import java.util.Collections;
@@ -25,7 +26,7 @@ public class OnListNewsItemNextListener implements Action1<java.util.List<NewsIt
         // as then otto won't receive the items. So we have to sort the items manually
         Collections.sort(newsItems, new NewsItemComparator());
 
-        mNetworkBus.post(newsItems);
+        mNetworkBus.post(new Events.NewsItemsSuccessEvent(newsItems));
     }
 }
 

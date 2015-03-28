@@ -14,12 +14,12 @@ import android.widget.TextView;
 import com.emmaguy.hn.R;
 import com.emmaguy.hn.common.DividerItemDecoration;
 import com.emmaguy.hn.common.EventBusProvider;
-import com.emmaguy.hn.model.data.HackerNewsDataSource;
 import com.emmaguy.hn.model.NewsItem;
+import com.emmaguy.hn.model.data.HackerNewsDataSource;
+import com.emmaguy.hn.model.data.WebDataSource;
 import com.emmaguy.hn.presenter.newsitems.NewsItemsPresenter;
 import com.emmaguy.hn.presenter.newsitems.NewsItemsPresenterImpl;
 import com.emmaguy.hn.view.NewsItemsView;
-import com.emmaguy.hn.model.data.WebDataSource;
 
 import java.util.List;
 

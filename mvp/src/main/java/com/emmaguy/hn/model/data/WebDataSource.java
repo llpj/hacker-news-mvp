@@ -21,7 +21,7 @@ import rx.schedulers.Schedulers;
  * Created by emma on 21/03/15.
  */
 public class WebDataSource implements HackerNewsDataSource {
-    private static final int MAX_NUMBER_STORIES = 35;
+    private static final int MAX_NUMBER_STORIES = 1;
     private static final String ENDPOINT_URL_HACKER_NEWS_API = "https://hacker-news.firebaseio.com";
     private static HackerNewsDataSource sDataSourceInstance = null;
     private final HackerNewsService mHackerNewsService;

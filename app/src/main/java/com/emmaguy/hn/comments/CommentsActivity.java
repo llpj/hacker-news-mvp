@@ -19,6 +19,7 @@ import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -74,7 +75,7 @@ public class CommentsActivity extends ActionBarActivity implements CommentsView 
     }
 
     @Override
-    public void showComments(ArrayList<Comment> comments) {
+    public void showComments(List<Comment> comments) {
         TreeNode root = TreeNode.root();
 
         for (Comment c : comments) {

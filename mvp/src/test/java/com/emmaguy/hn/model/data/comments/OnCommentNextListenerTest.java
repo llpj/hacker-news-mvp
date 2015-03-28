@@ -2,6 +2,7 @@ package com.emmaguy.hn.model.data.comments;
 
 import com.emmaguy.hn.model.Comment;
 import com.emmaguy.hn.model.NewsItem;
+import com.emmaguy.hn.model.data.Events;
 import com.emmaguy.hn.model.data.comments.OnCommentNextListener;
 import com.emmaguy.hn.model.data.newsitems.OnListNewsItemNextListener;
 import com.squareup.otto.Bus;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -43,6 +45,6 @@ public class OnCommentNextListenerTest {
 
         mNextListener.call(comments);
 
-        verify(mMockNetworkBus, times(1)).post(comments);
+        verify(mMockNetworkBus, times(1)).post(any(Events.CommentsSuccessEvent.class));
     }
 }
