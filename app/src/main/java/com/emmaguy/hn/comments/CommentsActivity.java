@@ -1,6 +1,5 @@
 package com.emmaguy.hn.comments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -11,7 +10,10 @@ import android.widget.ScrollView;
 import com.emmaguy.hn.R;
 import com.emmaguy.hn.common.EventBusProvider;
 import com.emmaguy.hn.model.Comment;
-import com.emmaguy.hn.model.HackerNewsDataSource;
+import com.emmaguy.hn.model.data.HackerNewsDataSource;
+import com.emmaguy.hn.presenter.comments.CommentsPresenter;
+import com.emmaguy.hn.presenter.comments.CommentsPresenterImpl;
+import com.emmaguy.hn.view.CommentsView;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
@@ -56,11 +58,6 @@ public class CommentsActivity extends ActionBarActivity implements CommentsView 
         mPresenter.onStop();
 
         super.onStop();
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
     }
 
     @Override
