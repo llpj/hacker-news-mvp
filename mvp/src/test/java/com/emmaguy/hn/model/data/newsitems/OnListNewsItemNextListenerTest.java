@@ -1,4 +1,4 @@
-package com.emmaguy.hn.model.data;
+package com.emmaguy.hn.model.data.newsitems;
 
 import com.emmaguy.hn.model.NewsItem;
 import com.emmaguy.hn.model.data.newsitems.OnListNewsItemNextListener;

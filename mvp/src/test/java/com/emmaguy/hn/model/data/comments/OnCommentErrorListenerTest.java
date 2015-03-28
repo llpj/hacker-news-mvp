@@ -1,5 +1,7 @@
-package com.emmaguy.hn.model.data;
+package com.emmaguy.hn.model.data.comments;
 
+import com.emmaguy.hn.model.data.comments.CommentRequestFailedEvent;
+import com.emmaguy.hn.model.data.comments.OnCommentErrorListener;
 import com.emmaguy.hn.model.data.newsitems.NewsItemsRequestFailedEvent;
 import com.emmaguy.hn.model.data.newsitems.OnListNewsItemErrorListener;
 import com.squareup.otto.Bus;
@@ -17,24 +19,24 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 /**
  * Created by emma on 21/03/15.
  */
-public class OnListNewsItemErrorListenerTest {
+public class OnCommentErrorListenerTest {
     @Mock
     private Bus mMockNetworkBus;
 
-    private OnListNewsItemErrorListener mErrorListener;
+    private OnCommentErrorListener mErrorListener;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mErrorListener = new OnListNewsItemErrorListener(mMockNetworkBus);
+        mErrorListener = new OnCommentErrorListener(mMockNetworkBus);
     }
 
     @Test
     public void test_errorListener_postsRequestFailedOnEventBus() {
         mErrorListener.call(new Throwable("blah"));
 
-        verify(mMockNetworkBus, times(1)).post(any(NewsItemsRequestFailedEvent.class));
+        verify(mMockNetworkBus, times(1)).post(any(CommentRequestFailedEvent.class));
         verifyNoMoreInteractions(mMockNetworkBus);
     }
 }
