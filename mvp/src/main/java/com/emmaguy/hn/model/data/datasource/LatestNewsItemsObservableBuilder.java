@@ -48,7 +48,7 @@ public class LatestNewsItemsObservableBuilder {
 
                     @Override
                     public void onError(Throwable e) {
-int s = e.hashCode();
+
                     }
 
                     @Override
